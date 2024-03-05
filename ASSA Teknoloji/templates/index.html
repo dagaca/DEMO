@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Emotion and Text Analysis</title>
+</head>
+<body>
+    <h1>Video Emotion and Text Analysis</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".mp4">
+        <input type="text" name="skills" placeholder="Enter Required Skills (comma-separated)">
+        <input type="number" name="threshold" step="0.01" min="0" max="1" placeholder="Enter Threshold (e.g., 0.6)">
+        <button type="submit">Analyze</button>
+    </form>
+	
+    {% if emotions %}
+    <h2>Emotions:</h2>
+    <ul>
+        {% for emotion, probability in emotions.items() %}
+        <li>{{ emotion }}: {{ probability }}%</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+	
+	{% if text %}
+    <h2>Extracted Text:</h2>
+    <p>{{ text }}</p>
+    {% endif %}
+	
+    {% if sentiment_score is defined %}
+    <h2>Sentiment Score:</h2>
+    <p>{{ sentiment_score }}</p>
+    {% endif %}
+    
+	{% if skills_matched %}
+	<h2>Interview Skills Matched:</h2>
+	<ul>
+		{% for skill, summary in skills_matched.items() %}
+		<li><b>{{ skill }}:</b> {{ summary.occurrences }} occurrences</li>
+		<ul>
+			{% if summary.occurrences > 0 %}
+			{% for item in summary.occurrences_summary %}
+			<li>{{ item }}</li>
+			{% endfor %}
+			{% else %}
+			<li>No sentences found for this skill</li>
+			{% endif %}
+		</ul>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	
+    {% if evaluation_result is defined %}
+    <h2>Evaluation Result:</h2>
+    <p>{{ evaluation_result }}</p>
+    {% endif %}
+</body>
+</html>

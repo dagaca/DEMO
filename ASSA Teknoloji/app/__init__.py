@@ -12,7 +12,7 @@ from flask import Flask
 
 # Create Flask application for HTML usage - TEST
 # Set the template folder path to '/templates'
-# app = Flask(__name__, template_folder='/templates')
+# app = Flask(__name__, template_folder='C:/Users/dagac/Desktop/github/DEMO/ASSA Teknoloji/templates/')
 
 # Create Flask application for API service - POSTMAN
 # Initialize Flask application
